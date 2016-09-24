@@ -9,12 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController {
-    // "!" means that it can be nil, but know that it won't be. "?" puts value in a wrapper
-    @IBOutlet var myLabel: UILabel!
-
+    @IBOutlet weak var myTextField: UITextField!
+    @IBOutlet weak var myLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    @IBAction func didTapButton(_ sender: AnyObject) {
+        // Use "var" for changes, use "let" if static
+        let name = myTextField.text!
+        myLabel.text = "Hi \(name)!"
     }
 
     override func didReceiveMemoryWarning() {
