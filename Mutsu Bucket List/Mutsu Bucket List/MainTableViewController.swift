@@ -10,7 +10,7 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
 
-    var fruits = ["Apple", "Apricot", "Banana", "Blueberry", "Cantaloupe", "Cherry"]
+    var bucketList = ["Streak the Lawn", "Attend Rotunda Sing", "See the River on the Lawn", "Go to UPC's Springfest", "See the Purple Shadows on TJ's Birthday", "Fill in the Blank"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,38 +21,74 @@ class MainTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-        self.view.addGestureRecognizer(swipeRight)
+//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
+//        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+//        self.view.addGestureRecognizer(swipeRight)
+        
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(gesture:)))
+        self.tableView.addGestureRecognizer(recognizer)
     }
     
-    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.right:
-                print("Swiped right")
-            case UISwipeGestureRecognizerDirection.down:
-                print("Swiped down")
-            case UISwipeGestureRecognizerDirection.left:
-                print("Swiped left")
-            case UISwipeGestureRecognizerDirection.up:
-                print("Swiped up")
-            default:
-                break
+    func didSwipe(gesture: UIGestureRecognizer) {
+        if gesture.state == UIGestureRecognizerState.ended {
+            let swipeLocation = gesture.location(in: self.tableView)
+            if let swipedIndexPath = tableView.indexPathForRow(at: swipeLocation) {
+                if let swipedCell = self.tableView.cellForRow(at: swipedIndexPath) {
+                    if swipedCell.accessoryType == UITableViewCellAccessoryType.checkmark {
+                        swipedCell.accessoryType = UITableViewCellAccessoryType.none
+                    }
+                    else {
+                        swipedCell.accessoryType = UITableViewCellAccessoryType.checkmark
+                    }
+                }
             }
         }
+        else {
+            
+        }
+        print("Did swipe")
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (self.tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
-            self.tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
-        }
-        else {
-            self.tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
-        }
-        print("\(indexPath.row) touched")
-    }
+    
+//    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+//        
+//        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+//
+//            switch swipeGesture.direction {
+//            case UISwipeGestureRecognizerDirection.right:
+//                print("Swiped right")
+//            case UISwipeGestureRecognizerDirection.down:
+//                print("Swiped down")
+//            case UISwipeGestureRecognizerDirection.left:
+//                print("Swiped left")
+//            case UISwipeGestureRecognizerDirection.up:
+//                print("Swiped up")
+//            default:
+//                break
+//            }
+//        
+//        }
+//
+//    }
+    
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            bucketList.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        } else if editingStyle == .insert {
+//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+//        }
+//    }
+    
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if (self.tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
+//            self.tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
+//        }
+//        else {
+//            self.tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
+//        }
+//        print("\(indexPath.row) touched")
+//    }
 
     // MARK: - Table view data source
 
@@ -63,13 +99,13 @@ class MainTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return fruits.count
+        return bucketList.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
         
-        cell.textLabel?.text = fruits[indexPath.row]
+        cell.textLabel?.text = bucketList[indexPath.row]
         
         return cell
     }
