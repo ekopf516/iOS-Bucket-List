@@ -13,6 +13,7 @@
 		D2E97A271D9786C100F05B08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2E97A251D9786C100F05B08 /* LaunchScreen.storyboard */; };
 		D2E97A321D9786C100F05B08 /* Mutsu_Bucket_ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E97A311D9786C100F05B08 /* Mutsu_Bucket_ListTests.swift */; };
 		D2E97A3D1D9786C100F05B08 /* Mutsu_Bucket_ListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E97A3C1D9786C100F05B08 /* Mutsu_Bucket_ListUITests.swift */; };
+		D2E97A511D97941100F05B08 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E97A501D97941100F05B08 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		D2E97A381D9786C100F05B08 /* Mutsu Bucket ListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mutsu Bucket ListUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E97A3C1D9786C100F05B08 /* Mutsu_Bucket_ListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutsu_Bucket_ListUITests.swift; sourceTree = "<group>"; };
 		D2E97A3E1D9786C100F05B08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2E97A501D97941100F05B08 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				D2E97A231D9786C100F05B08 /* Assets.xcassets */,
 				D2E97A251D9786C100F05B08 /* LaunchScreen.storyboard */,
 				D2E97A281D9786C100F05B08 /* Info.plist */,
+				D2E97A501D97941100F05B08 /* TableViewController.swift */,
 			);
 			path = "Mutsu Bucket List";
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2E97A1D1D9786C100F05B08 /* AppDelegate.swift in Sources */,
+				D2E97A511D97941100F05B08 /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +503,7 @@
 				D2E97A431D9786C100F05B08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D2E97A441D9786C100F05B08 /* Build configuration list for PBXNativeTarget "Mutsu Bucket ListTests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +512,7 @@
 				D2E97A461D9786C100F05B08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D2E97A471D9786C100F05B08 /* Build configuration list for PBXNativeTarget "Mutsu Bucket ListUITests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +521,7 @@
 				D2E97A491D9786C100F05B08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
