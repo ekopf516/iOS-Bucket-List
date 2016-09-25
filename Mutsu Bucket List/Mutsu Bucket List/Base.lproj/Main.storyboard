@@ -96,7 +96,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LabelCell" textLabel="cnd-Eg-sCL" style="IBUITableViewCellStyleDefault" id="CNS-Tq-v0L">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CNS-Tq-v0L" id="sEz-Ru-aB0">
                                     <frame key="frameInset" width="375" height="43"/>
@@ -128,12 +128,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KzE-im-TOl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1880.8" y="813.64317841079469"/>
+            <point key="canvasLocation" x="1852" y="814"/>
         </scene>
         <!--New Item-->
         <scene sceneID="dqK-WL-QZQ">
             <objects>
-                <viewController title="New Item" id="ZZE-Yz-HsQ" sceneMemberID="viewController">
+                <viewController title="New Item" id="ZZE-Yz-HsQ" customClass="NewItemViewController" customModule="Mutsu_Bucket_List" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KXk-Zs-ng4"/>
                         <viewControllerLayoutGuide type="bottom" id="FW2-ce-dmQ"/>
@@ -153,10 +153,17 @@
                                 <frame key="frameInset" minX="124" minY="337" width="126" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add to Bucket List"/>
+                                <connections>
+                                    <action selector="addButtonPress:" destination="ZZE-Yz-HsQ" eventType="touchUpInside" id="Vbc-pO-cau"/>
+                                    <segue destination="0hx-HO-vv6" kind="show" identifier="buttonSegue" id="4Tl-5W-gZU"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="KCp-S0-2vt" id="LXl-nZ-NxB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lL9-75-ATR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -236,4 +243,7 @@
             <point key="canvasLocation" x="941.60000000000002" y="813.64317841079469"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="4Tl-5W-gZU"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -11,6 +11,7 @@ import UIKit
 class MainTableViewController: UITableViewController {
 
     var bucketList = ["Streak the Lawn", "Attend Rotunda Sing", "See the River on the Lawn", "Go to UPC's Springfest", "See the Purple Shadows on TJ's Birthday", "Fill in the Blank"]
+    var Duration2: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,12 @@ class MainTableViewController: UITableViewController {
             
         }
         print("Did swipe")
+    }
+    
+    override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
+        if buttonSegue == unwindSegue {
+            print("amazing")
+        }
     }
     
     
