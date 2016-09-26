@@ -50,33 +50,13 @@ class MainTableViewController: UITableViewController {
         print("Did swipe")
     }
     
+    /*
     override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
         if buttonSegue == unwindSegue {
             print("amazing")
         }
     }
-    
-    
-//    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-//        
-//        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-//
-//            switch swipeGesture.direction {
-//            case UISwipeGestureRecognizerDirection.right:
-//                print("Swiped right")
-//            case UISwipeGestureRecognizerDirection.down:
-//                print("Swiped down")
-//            case UISwipeGestureRecognizerDirection.left:
-//                print("Swiped left")
-//            case UISwipeGestureRecognizerDirection.up:
-//                print("Swiped up")
-//            default:
-//                break
-//            }
-//        
-//        }
-//
-//    }
+     */
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -86,16 +66,6 @@ class MainTableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
     }
-    
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if (self.tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark){
-//            self.tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
-//        }
-//        else {
-//            self.tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
-//        }
-//        print("\(indexPath.row) touched")
-//    }
 
     // MARK: - Table view data source
 
@@ -117,6 +87,10 @@ class MainTableViewController: UITableViewController {
         return cell
     }
 
+    /***************
+    Keep the following comments in case we need them for the full, final project"
+    ***************/
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
