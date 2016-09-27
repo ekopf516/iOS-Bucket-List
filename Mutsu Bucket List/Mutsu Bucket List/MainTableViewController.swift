@@ -27,28 +27,57 @@ class MainTableViewController: UITableViewController {
 //        self.view.addGestureRecognizer(swipeRight)
         
         let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(gesture:)))
+        recognizer.direction = UISwipeGestureRecognizerDirection.right
         self.tableView.addGestureRecognizer(recognizer)
+        
+        let leftRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipe(gesture:)))
+        leftRecognizer.direction = UISwipeGestureRecognizerDirection.left
+        self.tableView.addGestureRecognizer(leftRecognizer)
     }
     
-    func didSwipe(gesture: UIGestureRecognizer) {
-        if gesture.state == UIGestureRecognizerState.ended {
-            let swipeLocation = gesture.location(in: self.tableView)
-            if let swipedIndexPath = tableView.indexPathForRow(at: swipeLocation) {
-                if let swipedCell = self.tableView.cellForRow(at: swipedIndexPath) {
-                    if swipedCell.accessoryType == UITableViewCellAccessoryType.checkmark {
-                        swipedCell.accessoryType = UITableViewCellAccessoryType.none
-                    }
-                    else {
-                        swipedCell.accessoryType = UITableViewCellAccessoryType.checkmark
+    func didSwipe(gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == UISwipeGestureRecognizerDirection.right {
+            if gesture.state == UIGestureRecognizerState.ended {
+                let swipeLocation = gesture.location(in: self.tableView)
+                if let swipedIndexPath = tableView.indexPathForRow(at: swipeLocation) {
+                    if let swipedCell = self.tableView.cellForRow(at: swipedIndexPath) {
+                        if swipedCell.accessoryType == UITableViewCellAccessoryType.checkmark {
+                            swipedCell.accessoryType = UITableViewCellAccessoryType.none
+                        }
+                        else {
+                            swipedCell.accessoryType = UITableViewCellAccessoryType.checkmark
+                        }
                     }
                 }
             }
-        }
-        else {
+            else {
+            }
             
+            print("Did swipe")
         }
-        print("Did swipe")
     }
+    
+    func leftSwipe(gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == UISwipeGestureRecognizerDirection.left {
+            if gesture.state == UIGestureRecognizerState.ended {
+                let swipeLocation = gesture.location(in: self.tableView)
+                if let swipedIndexPath = tableView.indexPathForRow(at: swipeLocation) {
+                    if let swipedCell = self.tableView.cellForRow(at: swipedIndexPath) {
+                        if swipedCell.accessoryType == UITableViewCellAccessoryType.checkmark {
+                            swipedCell.accessoryType = UITableViewCellAccessoryType.none
+                        }
+                        else {
+                            swipedCell.accessoryType = UITableViewCellAccessoryType.checkmark
+                        }
+                    }
+                }
+            }
+            else {
+            }
+            print("Left Swipe")
+        }
+    }
+
     
     /*
     override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
@@ -57,15 +86,6 @@ class MainTableViewController: UITableViewController {
         }
     }
      */
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            bucketList.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-        }
-    }
 
     // MARK: - Table view data source
 
