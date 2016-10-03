@@ -10,6 +10,7 @@ import UIKit
 
 class NewItemViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var descField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,12 +19,12 @@ class NewItemViewController: UIViewController {
     }
     
     @IBAction func addButtonPress(_ sender: UIButton) {
-        print("\(textField.text)")
+        print("\(textField.text)::\(descField.text)")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let theDestination = (segue.destination as! MainTableViewController)
-        theDestination.Duration2 = textField.text
+        theDestination.Duration2 = ("\(textField.text!)::\(descField.text!)")
     }
 
     override func didReceiveMemoryWarning() {

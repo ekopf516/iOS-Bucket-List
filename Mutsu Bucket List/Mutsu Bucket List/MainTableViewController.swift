@@ -7,14 +7,20 @@
 //
 
 import UIKit
+import Foundation
 
 class MainTableViewController: UITableViewController {
 
-    var bucketList = ["Streak the Lawn", "Attend Rotunda Sing", "See the River on the Lawn", "Go to UPC's Springfest", "See the Purple Shadows on TJ's Birthday", "Fill in the Blank"]
-    var Duration2: String?
+    var bucketList = ["Streak the Lawn::Feel the cool, gentle breeze between your thighs down the purple shadows of the Lawn", "Attend Rotunda Sing::Annual UPC event featuring many of UVA's acapella groups", "See the River on the Lawn::Sit upside down at the highest steps of the Rotunda and let your imagination run free", "Go to UPC's Springfest::Annual UPC event held on the Lawn featuring local and national artists", "See the Purple Shadows on TJ's Birthday::On the sunrise of Thomas Jefferson's birthday, the Purple Shadows lay a wreath at the base of his statue on the lawn. Come watch.", "Fill in the Blank::Make your own entry!"]
+    var Duration2: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if((Duration2) != nil) {
+            bucketList.append(Duration2!)
+        }
+        
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -101,7 +107,7 @@ class MainTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
         
-        cell.textLabel?.text = bucketList[indexPath.row]
+        cell.textLabel?.text = bucketList[indexPath.row].components(separatedBy: "::")[0]
         
         return cell
     }
