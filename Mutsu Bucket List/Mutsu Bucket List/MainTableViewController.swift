@@ -36,13 +36,14 @@ class MainTableViewController: UITableViewController {
     }
     
     func didSwipe(gesture: UISwipeGestureRecognizer) {
+        // Recognizes right swipe and checks box
         if gesture.direction == UISwipeGestureRecognizerDirection.right {
             if gesture.state == UIGestureRecognizerState.ended {
                 let swipeLocation = gesture.location(in: self.tableView)
                 if let swipedIndexPath = tableView.indexPathForRow(at: swipeLocation) {
                     if let swipedCell = self.tableView.cellForRow(at: swipedIndexPath) {
                         if swipedCell.accessoryType == UITableViewCellAccessoryType.checkmark {
-                            swipedCell.accessoryType = UITableViewCellAccessoryType.none
+//                            swipedCell.accessoryType = UITableViewCellAccessoryType.none
                         }
                         else {
                             swipedCell.accessoryType = UITableViewCellAccessoryType.checkmark
@@ -58,6 +59,7 @@ class MainTableViewController: UITableViewController {
     }
     
     func leftSwipe(gesture: UISwipeGestureRecognizer) {
+        // Recognizes left swipe and un-checks box
         if gesture.direction == UISwipeGestureRecognizerDirection.left {
             if gesture.state == UIGestureRecognizerState.ended {
                 let swipeLocation = gesture.location(in: self.tableView)
@@ -65,9 +67,6 @@ class MainTableViewController: UITableViewController {
                     if let swipedCell = self.tableView.cellForRow(at: swipedIndexPath) {
                         if swipedCell.accessoryType == UITableViewCellAccessoryType.checkmark {
                             swipedCell.accessoryType = UITableViewCellAccessoryType.none
-                        }
-                        else {
-                            swipedCell.accessoryType = UITableViewCellAccessoryType.checkmark
                         }
                     }
                 }
