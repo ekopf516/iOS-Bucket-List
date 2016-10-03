@@ -17,6 +17,8 @@ class MainTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.hidesBackButton = true
+        
         if((Duration2) != nil) {
             bucketList.append(Duration2!)
         }

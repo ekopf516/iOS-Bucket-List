@@ -24,6 +24,7 @@ class NewItemViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let theDestination = (segue.destination as! MainTableViewController)
+        // "!" needed here to prevent 'Optional' from popping up in string rendering
         theDestination.Duration2 = ("\(textField.text!)::\(descField.text!)")
     }
 
