@@ -41,6 +41,9 @@ class MainTableViewController: UITableViewController {
         let leftRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipe(gesture:)))
         leftRecognizer.direction = UISwipeGestureRecognizerDirection.left
         self.tableView.addGestureRecognizer(leftRecognizer)
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tableTap(gesture:)))
+        self.tableView.addGestureRecognizer(tapRecognizer)
     }
     
     func didSwipe(gesture: UISwipeGestureRecognizer) {
@@ -50,10 +53,7 @@ class MainTableViewController: UITableViewController {
                 let swipeLocation = gesture.location(in: self.tableView)
                 if let swipedIndexPath = tableView.indexPathForRow(at: swipeLocation) {
                     if let swipedCell = self.tableView.cellForRow(at: swipedIndexPath) {
-                        if swipedCell.accessoryType == UITableViewCellAccessoryType.checkmark {
-//                            swipedCell.accessoryType = UITableViewCellAccessoryType.none
-                        }
-                        else {
+                        if swipedCell.accessoryType != UITableViewCellAccessoryType.checkmark {
                             swipedCell.accessoryType = UITableViewCellAccessoryType.checkmark
                         }
                     }
@@ -79,9 +79,17 @@ class MainTableViewController: UITableViewController {
                     }
                 }
             }
-            else {
-            }
             print("Left Swipe")
+        }
+    }
+    
+    func tableTap(gesture: UITapGestureRecognizer) {
+        let touchLocation = gesture.location(in: self.tableView)
+        if let touchIndexPath = tableView.indexPathForRow(at: touchLocation) {
+            if let touchedCell = self.tableView.cellForRow(at: touchIndexPath) {
+                let txt:String? = touchedCell.textLabel?.text!
+                print(txt!)
+            }
         }
     }
 
