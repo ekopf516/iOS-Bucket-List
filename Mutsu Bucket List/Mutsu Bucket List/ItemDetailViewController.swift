@@ -9,6 +9,8 @@
 import UIKit
 
 class ItemDetailViewController: UIViewController {
+    @IBOutlet weak var DetailLabelFiller: UILabel!
+    @IBOutlet weak var DescriptionLabelFiller: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,8 @@ class ItemDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
     
 
     /*

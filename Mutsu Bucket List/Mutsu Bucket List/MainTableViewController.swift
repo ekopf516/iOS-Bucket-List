@@ -89,10 +89,28 @@ class MainTableViewController: UITableViewController {
             if let touchedCell = self.tableView.cellForRow(at: touchIndexPath) {
                 let txt:String? = touchedCell.textLabel?.text!
                 print(txt!)
+                if touchedCell.accessoryType == UITableViewCellAccessoryType.checkmark {
+                    print("done")
+                }
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                let destination = storyboard.instantiateViewController(withIdentifier: "ItemDetailViewController") as! ItemDetailViewController
+                navigationController?.pushViewController(destination, animated: true)
+               
+                
             }
         }
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ItemDetailSegue"{
+            if let ItemDetailViewController = segue.destination as? ItemDetailViewController{
+                ItemDetailViewController.DetailLabelFiller.text = "hello"
+                ItemDetailViewController.DescriptionLabelFiller.text = "hello"
+            }
+        }
+    }
+    
     
     /*
     override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
