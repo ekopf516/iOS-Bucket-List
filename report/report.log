@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.9.9)  7 OCT 2016 21:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.9.9)  8 OCT 2016 03:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -91,6 +91,18 @@ Overfull \hbox (12.30276pt too wide) in paragraph at lines 37--38
 troller-
  []
 
+
+Overfull \hbox (2.83759pt too wide) in paragraph at lines 38--39
+[]\OT1/cmr/m/n/12 http://stackoverflow.com/questions/25867439/get-the-indexpath
+-from-
+ []
+
+
+Overfull \hbox (1.72787pt too wide) in paragraph at lines 39--40
+[]\OT1/cmr/m/n/12 http://stackoverflow.com/questions/25678373/swift-split-a-str
+ing-into-
+ []
+
 [3] (./report.aux) ) 
 Here is how much of TeX's memory you used:
  218 strings out of 493013
@@ -104,7 +116,7 @@ Here is how much of TeX's memory you used:
 cmbx12.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 ><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texli
 ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on report.pdf (3 pages, 57287 bytes).
+Output written on report.pdf (3 pages, 57559 bytes).
 PDF statistics:
  30 PDF objects out of 1000 (max. 8388607)
  20 compressed objects within 1 object stream
