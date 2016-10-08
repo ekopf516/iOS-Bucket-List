@@ -11,8 +11,14 @@ import Foundation
 
 class MainTableViewController: UITableViewController {
 
-    var bucketList = ["Streak the Lawn::Feel the cool, gentle breeze between your thighs down the purple shadows of the Lawn", "Attend Rotunda Sing::Annual UPC event featuring many of UVA's acapella groups", "See the River on the Lawn::Sit upside down at the highest steps of the Rotunda and let your imagination run free", "Go to UPC's Springfest::Annual UPC event held on the Lawn featuring local and national artists", "See the Purple Shadows on TJ's Birthday::On the sunrise of Thomas Jefferson's birthday, the Purple Shadows lay a wreath at the base of his statue on the lawn. Come watch.", "Fill in the Blank::Make your own entry!"]
+    struct globalArray {
+        static var bucketList = ["Streak the Lawn::Feel the cool, gentle breeze between your thighs down the purple shadows of the Lawn", "Attend Rotunda Sing::Annual UPC event featuring many of UVA's acapella groups", "See the River on the Lawn::Sit upside down at the highest steps of the Rotunda and let your imagination run free", "Go to UPC's Springfest::Annual UPC event held on the Lawn featuring local and national artists", "See the Purple Shadows on TJ's Birthday::On the sunrise of Thomas Jefferson's birthday, the Purple Shadows lay a wreath at the base of his statue on the lawn. Come watch.", "Fill in the Blank::Make your own entry!"]
+    }
     var Duration2: String!
+    var Duration3: String!
+    var touchedRow: Int!
+    var done: String!
+    var lastTouch: UITableViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +26,21 @@ class MainTableViewController: UITableViewController {
         navigationItem.hidesBackButton = true
         
         if((Duration2) != nil) {
-            bucketList.append(Duration2!)
+            globalArray.bucketList.append(Duration2!)
+        }
+        
+        if((Duration3) != nil) {
+            print(Duration3)
+            let textArr : [String] = Duration3.components(separatedBy: "::")
+            print(textArr)
+            
+            let indexEdit: Int! = Int(textArr[2])
+            
+            globalArray.bucketList[indexEdit] = "\(textArr[0])::\(textArr[1])"
+            
+            touchedRow = indexEdit!
+            
+            done = textArr[3]
         }
         
         
@@ -30,10 +50,6 @@ class MainTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
-//        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-//        self.view.addGestureRecognizer(swipeRight)
-        
         let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(gesture:)))
         recognizer.direction = UISwipeGestureRecognizerDirection.right
         self.tableView.addGestureRecognizer(recognizer)
@@ -41,6 +57,9 @@ class MainTableViewController: UITableViewController {
         let leftRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipe(gesture:)))
         leftRecognizer.direction = UISwipeGestureRecognizerDirection.left
         self.tableView.addGestureRecognizer(leftRecognizer)
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tableTap(gesture:)))
+        self.tableView.addGestureRecognizer(tapRecognizer)
     }
     
     func didSwipe(gesture: UISwipeGestureRecognizer) {
@@ -50,10 +69,7 @@ class MainTableViewController: UITableViewController {
                 let swipeLocation = gesture.location(in: self.tableView)
                 if let swipedIndexPath = tableView.indexPathForRow(at: swipeLocation) {
                     if let swipedCell = self.tableView.cellForRow(at: swipedIndexPath) {
-                        if swipedCell.accessoryType == UITableViewCellAccessoryType.checkmark {
-//                            swipedCell.accessoryType = UITableViewCellAccessoryType.none
-                        }
-                        else {
+                        if swipedCell.accessoryType != UITableViewCellAccessoryType.checkmark {
                             swipedCell.accessoryType = UITableViewCellAccessoryType.checkmark
                         }
                     }
@@ -79,20 +95,45 @@ class MainTableViewController: UITableViewController {
                     }
                 }
             }
-            else {
-            }
             print("Left Swipe")
         }
     }
-
     
-    /*
-    override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
-        if buttonSegue == unwindSegue {
-            print("amazing")
+    func tableTap(gesture: UITapGestureRecognizer) {
+        let touchLocation = gesture.location(in: self.tableView)
+        if let touchIndexPath = tableView.indexPathForRow(at: touchLocation) {
+            if let touchedCell = self.tableView.cellForRow(at: touchIndexPath) {
+                touchedRow = (tableView.indexPath(for: touchedCell)?.row)!
+                
+                let txt:String? = touchedCell.textLabel?.text!
+                print("\(txt!)" + " is row " + "\(touchedRow!)")
+                
+                var done: String = "notDone"
+                
+                if touchedCell.accessoryType == UITableViewCellAccessoryType.checkmark {
+                    done = "done"
+                }
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                let destination = storyboard.instantiateViewController(withIdentifier: "ItemDetailViewController") as! ItemDetailViewController
+                
+                destination.duration = MainTableViewController.globalArray.bucketList[touchedRow]+"::\(String(touchedRow))::\(done)"
+                destination.touched = touchedCell
+                navigationController?.pushViewController(destination, animated: true)
+            }
         }
     }
-     */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("\(touchedRow)" + " happened")
+        
+        if segue.identifier == "ItemDetailViewController"{
+            if segue.destination is ItemDetailViewController{
+                let secondViewController = segue.destination as! ItemDetailViewController
+                secondViewController.duration = MainTableViewController.globalArray.bucketList[touchedRow]
+            }
+        }
+    }
 
     // MARK: - Table view data source
 
@@ -103,13 +144,24 @@ class MainTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return bucketList.count
+        return MainTableViewController.globalArray.bucketList.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
         
-        cell.textLabel?.text = bucketList[indexPath.row].components(separatedBy: "::")[0]
+        cell.textLabel?.text = MainTableViewController.globalArray.bucketList[indexPath.row].components(separatedBy: "::")[0]
+        
+        if touchedRow != nil {
+            if (indexPath.row == touchedRow) {
+                if(done == "done") {
+                    cell.accessoryType = UITableViewCellAccessoryType.checkmark
+                }
+                else {
+                    cell.accessoryType = UITableViewCellAccessoryType.none
+                }
+            }
+        }
         
         return cell
     }
