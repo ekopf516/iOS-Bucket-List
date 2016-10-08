@@ -18,7 +18,7 @@ class ItemDetailViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
     
     var duration: String!
-    var row: String?
+    var row: String! = "0"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,8 +52,14 @@ class ItemDetailViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let theDestination = (segue.destination as! MainTableViewController)
-        // "!" needed here to prevent 'Optional' from popping up in string rendering
+        
+//        var temp1 : String!
+//        temp1 = row!
+//        let temp2: String! = temp1!
+//        print(temp2)
+        
         theDestination.Duration3 = ("\(detailField.text!)::\(descField.text!)::\(row!)")
+        print(theDestination.Duration3)
     }
 
     override func didReceiveMemoryWarning() {

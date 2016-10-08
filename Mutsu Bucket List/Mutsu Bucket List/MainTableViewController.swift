@@ -26,10 +26,13 @@ class MainTableViewController: UITableViewController {
         }
         
         if((Duration3) != nil) {
+            print(Duration3)
             let textArr : [String] = Duration3.components(separatedBy: "::")
-            let index = Int(textArr[2])
-            print(index)
-            print(bucketList[2])
+            print(textArr)
+            
+            let index: Int! = Int(textArr[2])
+            
+            bucketList[index] = "\(textArr[0])::\(textArr[1])"
         }
         
         
@@ -38,10 +41,6 @@ class MainTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
-//        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-//        self.view.addGestureRecognizer(swipeRight)
         
         let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(gesture:)))
         recognizer.direction = UISwipeGestureRecognizerDirection.right
@@ -109,7 +108,8 @@ class MainTableViewController: UITableViewController {
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                 let destination = storyboard.instantiateViewController(withIdentifier: "ItemDetailViewController") as! ItemDetailViewController
-                destination.duration = bucketList[touchedRow]+"::\(touchedRow)::\(done)"
+                
+                destination.duration = bucketList[touchedRow]+"::\(String(touchedRow))::\(done)"
                 navigationController?.pushViewController(destination, animated: true)
                 
 //                performSegue(withIdentifier: "ItemDetailViewController", sender: nil)
