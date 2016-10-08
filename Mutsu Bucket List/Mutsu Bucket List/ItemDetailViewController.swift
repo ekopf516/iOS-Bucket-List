@@ -9,33 +9,51 @@
 import UIKit
 
 class ItemDetailViewController: UIViewController {
-//    @IBOutlet weak var DetailLabelFiller: UILabel!
-//    @IBOutlet weak var DescriptionLabelFiller: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
     
-//    @IBOutlet weak var detailLabel: UILabel!
-//    
-//    @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var detailField: UITextField!
+    @IBOutlet weak var descField: UITextField!
     
-    @IBOutlet weak var thing1: UILabel!
-    
-    @IBOutlet weak var thing2: UILabel!
+    @IBOutlet weak var button: UIButton!
     
     var duration: String!
+    var row: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        detailField.isHidden = true
+        descField.isHidden = true
+        button.isHidden = true
+        
+        let rightButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(showEditing))
+        self.navigationItem.rightBarButtonItem = rightButton
 
         // Do any additional setup after loading the view.
         if((duration) != nil) {
             print(duration)
             let textArr : [String] = duration.components(separatedBy: "::")
-            let detail : String = textArr[0]
-            let desc : String = textArr[1]
-            detailLabel.text = detail
-            descLabel.text = desc
+            detailLabel.text = textArr[0]
+            descLabel.text = textArr[1]
+            row = textArr[2]
         }
+    }
+    
+    func showEditing(sender: UIBarButtonItem)
+    {
+        detailField.isHidden = false
+        descField.isHidden = false
+        button.isHidden = false
+    }
+    
+    @IBAction func editItemButtonPressed(_ sender: UIButton) {
+        print("\(detailField.text!)::\(descField.text!)::\(row!)")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let theDestination = (segue.destination as! MainTableViewController)
+        // "!" needed here to prevent 'Optional' from popping up in string rendering
+        theDestination.Duration3 = ("\(detailField.text!)::\(descField.text!)::\(row!)")
     }
 
     override func didReceiveMemoryWarning() {

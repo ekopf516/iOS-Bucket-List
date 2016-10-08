@@ -13,6 +13,7 @@ class MainTableViewController: UITableViewController {
 
     var bucketList = ["Streak the Lawn::Feel the cool, gentle breeze between your thighs down the purple shadows of the Lawn", "Attend Rotunda Sing::Annual UPC event featuring many of UVA's acapella groups", "See the River on the Lawn::Sit upside down at the highest steps of the Rotunda and let your imagination run free", "Go to UPC's Springfest::Annual UPC event held on the Lawn featuring local and national artists", "See the Purple Shadows on TJ's Birthday::On the sunrise of Thomas Jefferson's birthday, the Purple Shadows lay a wreath at the base of his statue on the lawn. Come watch.", "Fill in the Blank::Make your own entry!"]
     var Duration2: String!
+    var Duration3: String!
     var touchedRow: Int!
     
     override func viewDidLoad() {
@@ -22,6 +23,13 @@ class MainTableViewController: UITableViewController {
         
         if((Duration2) != nil) {
             bucketList.append(Duration2!)
+        }
+        
+        if((Duration3) != nil) {
+            let textArr : [String] = Duration3.components(separatedBy: "::")
+            let index = Int(textArr[2])
+            print(index)
+            print(bucketList[2])
         }
         
         
@@ -93,13 +101,15 @@ class MainTableViewController: UITableViewController {
                 let txt:String? = touchedCell.textLabel?.text!
                 print("\(txt!)" + " is row " + "\(touchedRow!)")
                 
+                var done: String = "notDone"
+                
                 if touchedCell.accessoryType == UITableViewCellAccessoryType.checkmark {
-                    print("done")
+                    done = "done"
                 }
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                 let destination = storyboard.instantiateViewController(withIdentifier: "ItemDetailViewController") as! ItemDetailViewController
-                destination.duration = bucketList[touchedRow]
+                destination.duration = bucketList[touchedRow]+"::\(touchedRow)::\(done)"
                 navigationController?.pushViewController(destination, animated: true)
                 
 //                performSegue(withIdentifier: "ItemDetailViewController", sender: nil)
@@ -116,9 +126,6 @@ class MainTableViewController: UITableViewController {
         
         if segue.identifier == "ItemDetailViewController"{
             if segue.destination is ItemDetailViewController{
-//                ItemDetailViewController.DetailLabelFiller.text = "hello"
-//                ItemDetailViewController.DescriptionLabelFiller.text = "hello"
-                print("some bullshit")
                 let secondViewController = segue.destination as! ItemDetailViewController
                 secondViewController.duration = bucketList[touchedRow]
             }
