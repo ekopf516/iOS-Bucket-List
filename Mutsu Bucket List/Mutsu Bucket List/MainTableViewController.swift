@@ -11,10 +11,13 @@ import Foundation
 
 class MainTableViewController: UITableViewController {
 
-    var bucketList = ["Streak the Lawn::Feel the cool, gentle breeze between your thighs down the purple shadows of the Lawn", "Attend Rotunda Sing::Annual UPC event featuring many of UVA's acapella groups", "See the River on the Lawn::Sit upside down at the highest steps of the Rotunda and let your imagination run free", "Go to UPC's Springfest::Annual UPC event held on the Lawn featuring local and national artists", "See the Purple Shadows on TJ's Birthday::On the sunrise of Thomas Jefferson's birthday, the Purple Shadows lay a wreath at the base of his statue on the lawn. Come watch.", "Fill in the Blank::Make your own entry!"]
+    struct globalArray {
+        static var bucketList = ["Streak the Lawn::Feel the cool, gentle breeze between your thighs down the purple shadows of the Lawn", "Attend Rotunda Sing::Annual UPC event featuring many of UVA's acapella groups", "See the River on the Lawn::Sit upside down at the highest steps of the Rotunda and let your imagination run free", "Go to UPC's Springfest::Annual UPC event held on the Lawn featuring local and national artists", "See the Purple Shadows on TJ's Birthday::On the sunrise of Thomas Jefferson's birthday, the Purple Shadows lay a wreath at the base of his statue on the lawn. Come watch.", "Fill in the Blank::Make your own entry!"]
+    }
     var Duration2: String!
     var Duration3: String!
     var touchedRow: Int!
+    var lastTouch: UITableViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +25,7 @@ class MainTableViewController: UITableViewController {
         navigationItem.hidesBackButton = true
         
         if((Duration2) != nil) {
-            bucketList.append(Duration2!)
+            globalArray.bucketList.append(Duration2!)
         }
         
         if((Duration3) != nil) {
@@ -32,14 +35,16 @@ class MainTableViewController: UITableViewController {
             
             let indexEdit: Int! = Int(textArr[2])
             
-            bucketList[indexEdit] = "\(textArr[0])::\(textArr[1])"
+            globalArray.bucketList[indexEdit] = "\(textArr[0])::\(textArr[1])"
             
-            if let cell = tableView.cellForRow(at: NSIndexPath(index: indexEdit) as IndexPath) {
+            if let cell = lastTouch {
                 print("reached?")
                 if(textArr[3] == "done") {
+                    print("uhm")
                     cell.accessoryType = UITableViewCellAccessoryType.checkmark
                 }
                 else {
+                    print("nope")
                     cell.accessoryType = UITableViewCellAccessoryType.none
                 }
             }
@@ -119,14 +124,9 @@ class MainTableViewController: UITableViewController {
                 let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                 let destination = storyboard.instantiateViewController(withIdentifier: "ItemDetailViewController") as! ItemDetailViewController
                 
-                destination.duration = bucketList[touchedRow]+"::\(String(touchedRow))::\(done)"
+                destination.duration = MainTableViewController.globalArray.bucketList[touchedRow]+"::\(String(touchedRow))::\(done)"
+                destination.touched = touchedCell
                 navigationController?.pushViewController(destination, animated: true)
-                
-//                performSegue(withIdentifier: "ItemDetailViewController", sender: nil)
-                
-//                let viewControllerB = ItemDetailViewController()
-//                viewControllerB.duration = bucketList[touchedRow]
-//                navigationController?.pushViewController(viewControllerB, animated: true)
             }
         }
     }
@@ -137,18 +137,10 @@ class MainTableViewController: UITableViewController {
         if segue.identifier == "ItemDetailViewController"{
             if segue.destination is ItemDetailViewController{
                 let secondViewController = segue.destination as! ItemDetailViewController
-                secondViewController.duration = bucketList[touchedRow]
+                secondViewController.duration = MainTableViewController.globalArray.bucketList[touchedRow]
             }
         }
     }
-    
-    /*
-    override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
-        if buttonSegue == unwindSegue {
-            print("amazing")
-        }
-    }
-     */
 
     // MARK: - Table view data source
 
@@ -159,13 +151,13 @@ class MainTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return bucketList.count
+        return MainTableViewController.globalArray.bucketList.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
         
-        cell.textLabel?.text = bucketList[indexPath.row].components(separatedBy: "::")[0]
+        cell.textLabel?.text = MainTableViewController.globalArray.bucketList[indexPath.row].components(separatedBy: "::")[0]
         
         return cell
     }

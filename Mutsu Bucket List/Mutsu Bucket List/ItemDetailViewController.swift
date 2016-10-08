@@ -23,6 +23,7 @@ class ItemDetailViewController: UIViewController {
     var duration: String!
     var row: String! = "0"
     var done: String!
+    var touched: UITableViewCell!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +79,7 @@ class ItemDetailViewController: UIViewController {
         }
         
         theDestination.Duration3 = ("\(detailField.text!)::\(descField.text!)::\(row!)::\(done!)")
+        theDestination.lastTouch = touched!
     }
 
     override func didReceiveMemoryWarning() {
