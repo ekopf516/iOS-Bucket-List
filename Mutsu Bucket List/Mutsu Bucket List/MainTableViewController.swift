@@ -30,9 +30,19 @@ class MainTableViewController: UITableViewController {
             let textArr : [String] = Duration3.components(separatedBy: "::")
             print(textArr)
             
-            let index: Int! = Int(textArr[2])
+            let indexEdit: Int! = Int(textArr[2])
             
-            bucketList[index] = "\(textArr[0])::\(textArr[1])"
+            bucketList[indexEdit] = "\(textArr[0])::\(textArr[1])"
+            
+            if let cell = tableView.cellForRow(at: NSIndexPath(index: indexEdit) as IndexPath) {
+                print("reached?")
+                if(textArr[3] == "done") {
+                    cell.accessoryType = UITableViewCellAccessoryType.checkmark
+                }
+                else {
+                    cell.accessoryType = UITableViewCellAccessoryType.none
+                }
+            }
         }
         
         

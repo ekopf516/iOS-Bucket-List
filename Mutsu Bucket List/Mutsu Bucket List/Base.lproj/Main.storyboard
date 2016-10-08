@@ -94,7 +94,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcH-eJ-ZGM">
-                                <frame key="frameInset" minX="140" minY="468" width="95" height="30"/>
+                                <frame key="frameInset" minX="140" minY="536" width="95" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Edit Item"/>
                                 <connections>
@@ -102,15 +102,28 @@
                                     <segue destination="0hx-HO-vv6" kind="show" id="7HU-jP-upq"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="URD-vL-Sxy">
+                                <frame key="frameInset" minX="163" minY="490" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Completed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKM-Zv-ldG">
+                                <frame key="frameInset" minX="129" minY="444" width="116" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="button" destination="HcH-eJ-ZGM" id="nHP-SR-GB7"/>
+                        <outlet property="completedLabel" destination="dKM-Zv-ldG" id="F6V-PF-Ab9"/>
                         <outlet property="descField" destination="635-AB-Rrp" id="z35-04-fb5"/>
                         <outlet property="descLabel" destination="5Y4-vw-Xym" id="lVK-OD-Pas"/>
                         <outlet property="detailField" destination="zfq-NN-HCK" id="bEH-pH-pXM"/>
                         <outlet property="detailLabel" destination="bjS-MF-x0U" id="zhc-TT-fTN"/>
+                        <outlet property="doneSwitch" destination="URD-vL-Sxy" id="s5e-0F-5YY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sy7-eh-NKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -198,6 +211,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="fHn-oc-7zj"/>
+        <segue reference="7HU-jP-upq"/>
     </inferredMetricsTieBreakers>
 </document>

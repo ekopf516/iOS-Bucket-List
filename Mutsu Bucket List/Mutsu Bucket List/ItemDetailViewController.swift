@@ -11,19 +11,25 @@ import UIKit
 class ItemDetailViewController: UIViewController {
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var completedLabel: UILabel!
     
     @IBOutlet weak var detailField: UITextField!
     @IBOutlet weak var descField: UITextField!
+    
+    @IBOutlet weak var doneSwitch: UISwitch!
     
     @IBOutlet weak var button: UIButton!
     
     var duration: String!
     var row: String! = "0"
+    var done: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         detailField.isHidden = true
         descField.isHidden = true
+        doneSwitch.isHidden = true
+        completedLabel.isHidden = true
         button.isHidden = true
         
         let rightButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(showEditing))
@@ -36,6 +42,7 @@ class ItemDetailViewController: UIViewController {
             detailLabel.text = textArr[0]
             descLabel.text = textArr[1]
             row = textArr[2]
+            done = textArr[3]
         }
     }
     
@@ -43,7 +50,17 @@ class ItemDetailViewController: UIViewController {
     {
         detailField.isHidden = false
         descField.isHidden = false
+        completedLabel.isHidden = false
         button.isHidden = false
+        
+        if(done == "done") {
+            doneSwitch.isOn = true
+        }
+        else {
+            doneSwitch.isOn = false
+        }
+        
+        doneSwitch.isHidden = false
     }
     
     @IBAction func editItemButtonPressed(_ sender: UIButton) {
@@ -53,13 +70,14 @@ class ItemDetailViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let theDestination = (segue.destination as! MainTableViewController)
         
-//        var temp1 : String!
-//        temp1 = row!
-//        let temp2: String! = temp1!
-//        print(temp2)
+        if (doneSwitch.isOn) {
+            done = "done"
+        }
+        else {
+            done = "notDone"
+        }
         
-        theDestination.Duration3 = ("\(detailField.text!)::\(descField.text!)::\(row!)")
-        print(theDestination.Duration3)
+        theDestination.Duration3 = ("\(detailField.text!)::\(descField.text!)::\(row!)::\(done!)")
     }
 
     override func didReceiveMemoryWarning() {
