@@ -9,13 +9,33 @@
 import UIKit
 
 class ItemDetailViewController: UIViewController {
-    @IBOutlet weak var DetailLabelFiller: UILabel!
-    @IBOutlet weak var DescriptionLabelFiller: UILabel!
+//    @IBOutlet weak var DetailLabelFiller: UILabel!
+//    @IBOutlet weak var DescriptionLabelFiller: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var descLabel: UILabel!
+    
+//    @IBOutlet weak var detailLabel: UILabel!
+//    
+//    @IBOutlet weak var descLabel: UILabel!
+    
+    @IBOutlet weak var thing1: UILabel!
+    
+    @IBOutlet weak var thing2: UILabel!
+    
+    var duration: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if((duration) != nil) {
+            print(duration)
+            let textArr : [String] = duration.components(separatedBy: "::")
+            let detail : String = textArr[0]
+            let desc : String = textArr[1]
+            detailLabel.text = detail
+            descLabel.text = desc
+        }
     }
 
     override func didReceiveMemoryWarning() {

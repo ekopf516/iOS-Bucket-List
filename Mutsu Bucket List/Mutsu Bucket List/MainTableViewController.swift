@@ -13,6 +13,7 @@ class MainTableViewController: UITableViewController {
 
     var bucketList = ["Streak the Lawn::Feel the cool, gentle breeze between your thighs down the purple shadows of the Lawn", "Attend Rotunda Sing::Annual UPC event featuring many of UVA's acapella groups", "See the River on the Lawn::Sit upside down at the highest steps of the Rotunda and let your imagination run free", "Go to UPC's Springfest::Annual UPC event held on the Lawn featuring local and national artists", "See the Purple Shadows on TJ's Birthday::On the sunrise of Thomas Jefferson's birthday, the Purple Shadows lay a wreath at the base of his statue on the lawn. Come watch.", "Fill in the Blank::Make your own entry!"]
     var Duration2: String!
+    var touchedRow: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,30 +88,42 @@ class MainTableViewController: UITableViewController {
         let touchLocation = gesture.location(in: self.tableView)
         if let touchIndexPath = tableView.indexPathForRow(at: touchLocation) {
             if let touchedCell = self.tableView.cellForRow(at: touchIndexPath) {
+                touchedRow = (tableView.indexPath(for: touchedCell)?.row)!
+                
                 let txt:String? = touchedCell.textLabel?.text!
-                print(txt!)
+                print("\(txt!)" + " is row " + "\(touchedRow!)")
+                
                 if touchedCell.accessoryType == UITableViewCellAccessoryType.checkmark {
                     print("done")
                 }
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                 let destination = storyboard.instantiateViewController(withIdentifier: "ItemDetailViewController") as! ItemDetailViewController
+                destination.duration = bucketList[touchedRow]
                 navigationController?.pushViewController(destination, animated: true)
-               
                 
+//                performSegue(withIdentifier: "ItemDetailViewController", sender: nil)
+                
+//                let viewControllerB = ItemDetailViewController()
+//                viewControllerB.duration = bucketList[touchedRow]
+//                navigationController?.pushViewController(viewControllerB, animated: true)
             }
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ItemDetailSegue"{
-            if let ItemDetailViewController = segue.destination as? ItemDetailViewController{
-                ItemDetailViewController.DetailLabelFiller.text = "hello"
-                ItemDetailViewController.DescriptionLabelFiller.text = "hello"
+        print("\(touchedRow)" + " happened")
+        
+        if segue.identifier == "ItemDetailViewController"{
+            if segue.destination is ItemDetailViewController{
+//                ItemDetailViewController.DetailLabelFiller.text = "hello"
+//                ItemDetailViewController.DescriptionLabelFiller.text = "hello"
+                print("some bullshit")
+                let secondViewController = segue.destination as! ItemDetailViewController
+                secondViewController.duration = bucketList[touchedRow]
             }
         }
     }
-    
     
     /*
     override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
