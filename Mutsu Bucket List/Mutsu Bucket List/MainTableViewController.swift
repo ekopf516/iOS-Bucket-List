@@ -17,6 +17,7 @@ class MainTableViewController: UITableViewController {
     var Duration2: String!
     var Duration3: String!
     var touchedRow: Int!
+    var done: String!
     var lastTouch: UITableViewCell!
     
     override func viewDidLoad() {
@@ -37,17 +38,9 @@ class MainTableViewController: UITableViewController {
             
             globalArray.bucketList[indexEdit] = "\(textArr[0])::\(textArr[1])"
             
-            if let cell = lastTouch {
-                print("reached?")
-                if(textArr[3] == "done") {
-                    print("uhm")
-                    cell.accessoryType = UITableViewCellAccessoryType.checkmark
-                }
-                else {
-                    print("nope")
-                    cell.accessoryType = UITableViewCellAccessoryType.none
-                }
-            }
+            touchedRow = indexEdit!
+            
+            done = textArr[3]
         }
         
         
@@ -158,6 +151,17 @@ class MainTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
         
         cell.textLabel?.text = MainTableViewController.globalArray.bucketList[indexPath.row].components(separatedBy: "::")[0]
+        
+        if touchedRow != nil {
+            if (indexPath.row == touchedRow) {
+                if(done == "done") {
+                    cell.accessoryType = UITableViewCellAccessoryType.checkmark
+                }
+                else {
+                    cell.accessoryType = UITableViewCellAccessoryType.none
+                }
+            }
+        }
         
         return cell
     }
