@@ -96,20 +96,22 @@ class MainTableViewController: UITableViewController {
                 let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                 let destination = storyboard.instantiateViewController(withIdentifier: "ItemDetailViewController") as! ItemDetailViewController
                 navigationController?.pushViewController(destination, animated: true)
+                performSegue(withIdentifier: "ItemDetailSegue", sender: self)
+
                
                 
             }
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ItemDetailSegue"{
-            if let ItemDetailViewController = segue.destination as? ItemDetailViewController{
-                ItemDetailViewController.DetailLabelFiller.text = "hello"
-                ItemDetailViewController.DescriptionLabelFiller.text = "hello"
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "ItemDetailSegue"{
+//            if let ItemDetailViewController = segue.destination as? ItemDetailViewController{
+//                ItemDetailViewController.DetailLabelFiller.text = "hello"
+//                ItemDetailViewController.DescriptionLabelFiller.text = "hello"
+//            }
+//        }
+//    }
     
     
     /*

@@ -16,7 +16,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LabelCell" textLabel="cnd-Eg-sCL" style="IBUITableViewCellStyleDefault" id="CNS-Tq-v0L">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CNS-Tq-v0L" id="sEz-Ru-aB0">
                                     <frame key="frameInset" width="375" height="43.5"/>
@@ -168,6 +168,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="fHn-oc-7zj"/>
+        <segue reference="by7-xF-xb2"/>
     </inferredMetricsTieBreakers>
 </document>
